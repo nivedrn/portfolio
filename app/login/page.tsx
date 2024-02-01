@@ -44,6 +44,7 @@ export default function Login() {
             setEmail("");
             setPassword("");
             setError("");
+            router.push("/edit");
         }
         router.refresh();
     }

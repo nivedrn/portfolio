@@ -3,24 +3,19 @@ import type { NextRequest } from 'next/server'
 import { createSupabaseReqResClient } from './lib/supabaseReqResClient'
 
 export async function middleware(req: NextRequest) {
-  const res = NextResponse.next()
+    const res = NextResponse.next()
 
-  const supabase = createSupabaseReqResClient(req, res);
-  await supabase.auth.getSession();
+    console.log("Middleware Run");
+    const supabase = createSupabaseReqResClient(req, res);
+    const data = await supabase.auth.getSession();
+    if (data.data.session == null) {
+        return NextResponse.redirect(new URL('/login', req.url))
+    }
 
-  console.log("Middleware Run");
-  return res
+    return res
 }
 
 // Ensure the middleware is only called for relevant paths.
 export const config = {
-  matcher: [
-    /*
-     * Match all request paths except for the ones starting with:
-     * - _next/static (static files)
-     * - _next/image (image optimization files)
-     * - favicon.ico (favicon file)
-     */
-    '/((?!_next/static|_next/image|favicon.ico|^\/$).*)',
-  ],
+    matcher: ['/edit']
 }
