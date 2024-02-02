@@ -1,6 +1,4 @@
 "use client";
-import { useRouter } from "next/navigation";
-
 import ThemeSwitcher from "@/components/themeSwitcher";
 import { Icons } from "@/components/icons";
 import { Label } from "@/components/ui/label"
@@ -23,8 +21,6 @@ interface Props {
 }
 
 export default function Navbar(props: Props) {
-    const router = useRouter();
-
     return (
         <div className="grid grid-cols-2 w-full h-[48px] flex-row items-center px-3 pt-2">
             <div className="-z-42">

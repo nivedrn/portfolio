@@ -5,6 +5,7 @@ import { createSupabaseFrontendClient } from "@/lib/supabaseFrontendClient";
 import { User } from "@supabase/supabase-js";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
+import { useAppStore } from "@/state/appState";
 
 import {
     Card,
@@ -20,7 +21,7 @@ import Navbar from "@/components/navbar";
 export default function Login() {
     const router = useRouter();
     const [user, setUser] = useState<User | null>(null);
-    const [isLoading, setIsLoading] = useState(false);
+    const {isLoading, setIsLoading} = useAppStore();
     const [error, setError] = useState("");
     const supabase = createSupabaseFrontendClient();
 
