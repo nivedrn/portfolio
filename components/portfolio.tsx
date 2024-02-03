@@ -12,7 +12,7 @@ export default function Portfolio(props: Props) {
     const objMap = props.portfolio;
 
     return (
-        <div className="container mx-auto mt-[50px]">
+        <div>
             {objMap == null ? (<>No Data Found</>) : (
                 <>{objMap.toString()}</>
             )}

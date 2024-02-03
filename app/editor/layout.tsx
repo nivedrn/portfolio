@@ -14,9 +14,9 @@ export default function EditorLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <main>
-            <Navbar mode="editor" />
-            <div className="container p-0 mx-auto mt-[10px] md:mt-[20px] lg:mt-[40px] min-h-lvh">
+        <main className="flex flex-col flex-1">
+            <Navbar mode="editor"/>
+            <div className="container p-0 mx-auto mt-[10px] md:mt-[20px] lg:mt-[40px] grow ">
                 <div className="flex">
                     <Sidemenu />                    
                     <div className="flex-1 overflow-y-auto">

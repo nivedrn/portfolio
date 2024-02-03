@@ -6,7 +6,7 @@ export default function Footer() {
     const router = useRouter();
 
     return (
-        <main className="w-full relative bottom-0" >
+        <main className="w-full justitfy-end" >
             <Separator />
             <div className="flex flex-row w-full items-center justify-center">
                 <p className="text-center p-3">

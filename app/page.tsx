@@ -13,21 +13,25 @@ export default function Page() {
     useEffect(() => {
         if (portfolioData == null) {
             const fetchData = async() => {
-                const response = await fetchPortfolio();
-                setPortfolioData(response.data);
-            }
+                const { results, error} = await fetchPortfolio();
+                console.log('Fetched portfolio from Supabase:', results);
+                setPortfolioData(results);
+            } 
 
             fetchData();
         }
+
     }, []);
 
     return (
-        <main>
-            <Navbar mode="portfolio" />
-            <div className="flex flex-col items-center justify-top pt-3">
-                <Portfolio portfolio={portfolioData} />
+        <main className="flex flex-col flex-1">
+            <Navbar mode="portfolio"/>
+            <div className="container p-0 mx-auto mt-[10px] md:mt-[20px] grow ">
+                <div className="flex">
+                    <Portfolio portfolio={portfolioData} />
+                </div>
             </div>
-            <Footer/>
+            <Footer />
         </main>
     );
 }
