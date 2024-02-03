@@ -12,7 +12,11 @@ import {
     ScanEye,
     LayoutPanelLeft,
     PanelRightOpen,
-    LucideProps
+    LucideProps,
+    Settings,
+    Braces,
+    CircleUser,
+    Target
 } from "lucide-react"
 
 export const Icons = {
@@ -30,6 +34,10 @@ export const Icons = {
     menu: Menu,
     preview: ScanEye,
     panelRightOpen: PanelRightOpen,
+    settings: Settings,
+    json: Braces,
+    profile: CircleUser,
+    projects: Target,
     gitHub: ({ ...props }: LucideProps) => (
         <svg
             aria-hidden="true"

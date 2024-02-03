@@ -39,7 +39,7 @@ export default function Login() {
             setUser(res.data.user);
             setError("");
             setIsLoading(false);
-            router.push("/edit");
+            router.push("/editor");
         }
         router.refresh();
         setIsLoading(false);

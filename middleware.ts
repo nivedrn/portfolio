@@ -15,7 +15,6 @@ export async function middleware(req: NextRequest) {
     return res
 }
 
-// Ensure the middleware is only called for relevant paths.
 export const config = {
-    matcher: ['/edit']
+    matcher: ['/editor']
 }
