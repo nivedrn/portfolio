@@ -16,5 +16,5 @@ export async function middleware(req: NextRequest) {
 }
 
 export const config = {
-    matcher: ['/editor']
+    matcher: ['/editor/profile','/editor/projects','/editor/raw','/editor/settings','/editor/preview','/editor', ]
 }
