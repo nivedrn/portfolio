@@ -44,7 +44,7 @@ export default function Navbar(props: Props) {
     }, [pathname]);
 
     return (
-        <div className="grid grid-cols-3 w-full h-[48px] flex-row items-center pl-0 pr-2 md:px-3 pt-2 sticky top-0 bg-card">
+        <div className="grid grid-cols-3 w-full h-[48px] flex-row items-center pl-0 pr-2 md:px-3 pt-2 fixed top-0 bg-card">
             <div>
                 <Link href="/"
                     className={cn(
@@ -55,9 +55,8 @@ export default function Navbar(props: Props) {
                     <Icons.homeLogo className="mx-auto h-7 w-7 opacity-25" />
                 </Link>
             </div>
-
-            <div className="flex justify-center text-sm">
-                {props.mode === "editor" && (
+            {props.mode === "editor" ? (
+                <div className="flex justify-center text-sm">
                     <div className="grid grid-cols-2 w-[100px] lg:w-[250px] bg-accent rounded p-1 gap-1">
                         <div className={`flex flex-row items-center justify-center ${pathname == "/editor/preview" ? "" : "bg-card rounded shadow p-1"}`} >
                             <Icons.editorLogo className="h-5 w-5 opacity-55" />
@@ -68,11 +67,11 @@ export default function Navbar(props: Props) {
                             <span className="ml-2 hidden lg:inline">Preview</span>
                         </div>
                     </div>
-                )}
-            </div>
 
-            <div className="flex items-center justify-end">
-                {props.mode === "portfolio" && (<Link target="_blank" href="https://defdhwtsvqtwzskexsgd.supabase.co/storage/v1/object/public/nived-public/Nived%20R%20Nambiar%20-%20Resume.pdf" className="pr-10 text-gray-400 hover:text-sky-400"><strong>Resume</strong></Link>)}
+                </div>
+            ) : (<div className="hidden lg:block"></div>)}
+            <div className="flex items-center justify-end col-span-2 lg:col-span-1 ">
+                {props.mode === "portfolio" && (<Link title="Resume PDF" target="_blank" href="https://defdhwtsvqtwzskexsgd.supabase.co/storage/v1/object/public/nived-public/Nived%20R%20Nambiar%20-%20Resume.pdf" className="pr-10 text-gray-400 hover:text-sky-400"><strong>Resume</strong></Link>)}
                 <ThemeSwitcher />
                 {props.mode === "portfolio" && (
                     <div>
@@ -80,7 +79,7 @@ export default function Navbar(props: Props) {
                             className={cn(
                                 buttonVariants({ variant: "ghost" }),
                                 "p-0 px-3 "
-                            )}
+                            )} title="Github Link: Portfolio Project"
                         >
                             <Icons.gitHub className="mx-auto h-6 w-6 opacity-25" />
                         </Link>
@@ -88,7 +87,7 @@ export default function Navbar(props: Props) {
                             className={cn(
                                 buttonVariants({ variant: "ghost" }),
                                 "p-0 px-3"
-                            )}
+                            )} title="Portfolio Editor"
                         >
                             <Icons.editorLogo className="mx-auto h-6 w-6 opacity-25" />
                         </Link>

@@ -14,16 +14,12 @@ export default function EditorLayout({
     children: React.ReactNode;
 }>) {
     return (
-        <main className="flex flex-col flex-1">
-            <Navbar mode="editor"/>
-            <div className="container p-0 mx-auto mt-[10px] md:mt-[20px] lg:mt-[40px] grow ">
-                <div className="flex">
-                    <Sidemenu />                    
-                    <div className="flex-1 overflow-y-auto">
-                        <div className="p-4">
-                            {children}
-                        </div>
-                    </div>
+        <main className="flex flex-col flex-1 overflow-y-auto">
+            <Navbar mode="editor" />
+            <div className="flex flex-1 container p-0 mx-auto mt-[60px] ">
+                <div className="flex flex-1 p-5">
+                    <Sidemenu />
+                    {children}
                 </div>
             </div>
             <Footer />

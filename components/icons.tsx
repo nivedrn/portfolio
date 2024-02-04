@@ -16,7 +16,10 @@ import {
     Settings,
     Braces,
     CircleUser,
-    Target
+    Target,
+    ArrowUpRight,
+    Mail,
+    Linkedin
 } from "lucide-react"
 
 export const Icons = {
@@ -38,6 +41,9 @@ export const Icons = {
     json: Braces,
     profile: CircleUser,
     projects: Target,
+    linkArrow: ArrowUpRight,
+    mail: Mail,
+    linkedin: Linkedin,
     gitHub: ({ ...props }: LucideProps) => (
         <svg
             aria-hidden="true"

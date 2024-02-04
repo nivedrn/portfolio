@@ -9,14 +9,16 @@ import Navbar from "@/components/navbar";
 
 export default function Page() {
     const { portfolioData, setPortfolioData } = useAppStore();
+    const [objMap, setObjMap] = useState<any | null>(null);
 
     useEffect(() => {
         if (portfolioData == null) {
-            const fetchData = async() => {
-                const { results, error} = await fetchPortfolio();
+            const fetchData = async () => {
+                const { results, error } = await fetchPortfolio();
                 console.log('Fetched portfolio from Supabase:', results);
                 setPortfolioData(results);
-            } 
+                setObjMap(results.data);
+            }
 
             fetchData();
         }
@@ -25,10 +27,12 @@ export default function Page() {
 
     return (
         <main className="flex flex-col flex-1">
-            <Navbar mode="portfolio"/>
-            <div className="container p-0 mx-auto mt-[10px] md:mt-[20px] grow ">
+            <Navbar mode="portfolio" />
+            <div className="container p-0 mx-auto grow ">
                 <div className="flex">
-                    <Portfolio portfolio={portfolioData} />
+                    {objMap != null && (
+                        <Portfolio portfolio={objMap} />
+                    )}
                 </div>
             </div>
             <Footer />

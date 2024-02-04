@@ -3,7 +3,7 @@
 export default function Profile() {
 
     return (
-        <div>
+        <div className="flex flex-col flex-1 mb-10">
             <div id="basic" className="flex flex-col">
                 <h1 className="font-heading text-2xl md:text-3xl"><strong>Settings</strong></h1>
                 <p className="text-lg text-muted-foreground">Modify app & portfolio related settings.</p>
