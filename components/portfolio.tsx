@@ -3,19 +3,23 @@ import { useRouter, usePathname } from "next/navigation";
 import { Icons } from "@/components/icons";
 import { Json } from "@/database.types";
 import Link from "next/link";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
+import { Card, CardContent } from "@/components/ui/card"
 import {
-    Card,
-    CardContent,
-    CardDescription,
-    CardFooter,
-    CardHeader,
-    CardTitle,
-} from "@/components/ui/card"
+    Carousel,
+    CarouselContent,
+    CarouselItem,
+    CarouselNext,
+    CarouselPrevious,
+} from "@/components/ui/carousel"
+
 import { Badge } from "@/components/ui/badge";
 import { cn } from "@/lib/utils";
 import { buttonVariants } from "@/components/ui/button";
+import EmblaCarousel, { EmblaOptionsType } from 'embla-carousel';
+import Autoplay from "embla-carousel-autoplay"
 
 interface Props {
     portfolio: Json | null;
@@ -25,6 +29,7 @@ export default function Portfolio(props: Props) {
     const router = useRouter();
     const pathname = usePathname();
     const [objMap] = useState<any | null>(props.portfolio);
+    const OPTIONS: EmblaOptionsType = { loop: true };
 
     if (objMap == null) {
         return (<div>Loading...</div>)
@@ -157,29 +162,42 @@ export default function Portfolio(props: Props) {
                         <div className="flex flex-col">
                             {objMap.projects.map((prj: any, index: number) => {
                                 return (
-                                    <Link key={index} href={prj.link}>
-                                        <div className="grid grid-cols-1 gap-2 hover:bg-accent p-5 rounded-md">
-                                            <div className="flex flex-col col-span-1">
-                                                <h4 className="font-heading text-lg">
-                                                    <span>
-                                                        <strong className="hover:text-sky-400">{prj.name}</strong>
-                                                        <span className="text-gray-400"> • </span>
-                                                        <Link href={prj.source_code} className="group">
-                                                            <div className="text-muted-foreground inline-block font-heading text-md mt-2 lg:mt-0 group-hover:text-sky-400">
-                                                                Source Code
-                                                            </div>
-                                                            <Icons.linkArrow className="inline h-4 w-4 group-hover:text-sky-400 group-hover:animate-bounce" />
-                                                        </Link>
-                                                    </span>
-                                                </h4>
-                                                <p className="text-md text-justify text-muted-foreground">{prj.description}</p>
+                                    <div key={index} className="grid grid-cols-1 gap-2 hover:bg-accent p-5 rounded-md">
+                                        <div className="flex flex-col col-span-1">
+                                            <h4 className="font-heading text-lg">
+                                                <span>
+                                                    <strong className="hover:text-sky-400">{prj.name}</strong>
+                                                    <span className="text-gray-400"> • </span>
+                                                    <Link href={prj.source_code} className="group">
+                                                        <div className="text-muted-foreground inline-block font-heading text-md mt-2 lg:mt-0 group-hover:text-sky-400">
+                                                            Source Code
+                                                        </div>
+                                                        <Icons.linkArrow className="inline h-4 w-4 group-hover:text-sky-400 group-hover:animate-bounce" />
+                                                    </Link>
+                                                </span>
+                                            </h4>
+                                            <p className="text-md text-justify text-muted-foreground">{prj.description}</p>
 
-                                            </div>
-                                            <div className="flex flex-wrap gap-2">
-                                                {prj.tech_stack.map((skill: any) => <Badge key={skill} variant="outline" className="rounded-md bg-accent">{skill}</Badge>)}
-                                            </div>
                                         </div>
-                                    </Link>
+                                        <div className="flex flex-wrap gap-2">
+                                            {prj.tech_stack.map((skill: any) => <Badge key={skill} variant="outline" className="rounded-md bg-accent">{skill}</Badge>)}
+                                        </div>
+                                        {(prj.images.length > 0 && (
+                                            <div className="flex flex-wrap gap-2 ">
+                                                <Carousel className="w-full" plugins={[ Autoplay({ delay: 2000, }), ]}>
+                                                    <CarouselContent className="-ml-1">
+                                                        {prj.images.map((imgUrl: any, index: number) => (
+                                                            <CarouselItem key={index} className="pl-1 md:basis-2/3 ">
+                                                                <div className="p-1">
+                                                                    <Image src={imgUrl} alt={prj.name} width={400} height={400} className="w-full h-full object-cover" />
+                                                                </div>
+                                                            </CarouselItem>
+                                                        ))}
+                                                    </CarouselContent>
+                                                </Carousel>
+                                            </div>
+                                        ))}
+                                    </div>
                                 )
                             }
                             )}
