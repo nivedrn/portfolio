@@ -32,7 +32,7 @@ export default function Login() {
         console.log(formData.get("email"));
         const res = await supabase.auth.signInWithPassword({ email: formData.get("email") as string, password: formData.get("password") as string });
 
-        if (res.error) {
+        if (res.error != null) {
             console.log(res);
             setError(res.error.message);
         } else {

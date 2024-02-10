@@ -21,6 +21,8 @@ export default function Page() {
             }
 
             fetchData();
+        }else if(objMap == null){
+            setObjMap((portfolioData as { data: any }).data);
         }
 
     }, []);
